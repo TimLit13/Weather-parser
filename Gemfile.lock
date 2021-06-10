@@ -42,6 +42,7 @@ PLATFORMS
 
 DEPENDENCIES
   mechanize
+  nokogiri
   translit
 
 BUNDLED WITH
