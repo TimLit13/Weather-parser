@@ -77,7 +77,11 @@ chance_of_precipitation = parsed_page.search(".//*[starts-with(@class, 'precip-p
 #   puts chance
 # end
 
+all_winds = parsed_page.search(".//*[starts-with(@class, 'value')]").xpath('text()').to_a
 
+# all_winds.each do |wind|
+#   puts wind
+# end
 
 
 
