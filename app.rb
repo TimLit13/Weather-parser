@@ -1,8 +1,10 @@
 #encoding: cp866
 require 'mechanize'
+require_relative 'open_file.rb'
 
-#загрузить список городов, прочитать json файл
-file_list_of_cities = File.open "list_of_cities.txt", 'r'
+#загрузить список городов
+file_list_of_cities = open_file ('list_of_cities.txt')
+
 @cities = {}
 file_list_of_cities.each_line do |line|
   temp = []
