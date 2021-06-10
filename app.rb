@@ -44,7 +44,6 @@ url = "https://www.meteoservice.ru/weather/14days/#{user_city}"
 unparsed_page = URI.open(url)
 parsed_page  = Nokogiri::HTML(unparsed_page)
 
-#найти с помощью mechanize
 all_days_of_week = parsed_page.search('h3').xpath('text()')
 
 # #debug
@@ -52,6 +51,12 @@ all_days_of_week = parsed_page.search('h3').xpath('text()')
 #   puts day_of_week
 # end
 
+all_dates = parsed_page.search(".//*[starts-with(@class, 'text-nowrap grey show-for-large')]").xpath('text()').to_a
+
+# #debug
+# all_dates.each do |date|
+#   puts date
+# end
 
 
 
