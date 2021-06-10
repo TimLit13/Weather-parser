@@ -20,23 +20,32 @@ def debug
   puts '='*80
 end
 
-debug()
+# debug()
 
 # -----------------------------
 
-puts "Прогноз погоды"
+
+#Запрос данных от пользователя
+puts "Прогноз погоды на 2 недели"
 print "Укажите, какой город нужен: "
+
 user_city = gets.chomp.downcase
 user_city = Translit.convert(user_city, :english)
-puts user_city
+
+#дебаг
+#puts user_city
 
 
 #Создать экземпляр "браузера""
 agent = Mechanize.new()
 
-
-
 #скачать страницу
-# page = agent.get("https://www.meteoservice.ru/weather/14days/sankt-peterburg")
+page = agent.get("https://www.meteoservice.ru/weather/14days/#{user_city}")
+
+#дебаг
+puts page.body
+
+puts "Прогноз погоды взят с сайта: \"https://www.meteoservice.ru/\""
+
 # arr = []
 # arr = page.search("//tr[starts-with(@id, 'callout forecast-row weekend')]").to_a
