@@ -70,6 +70,13 @@ all_temperature = parsed_page.search(".//*[starts-with(@class, 'value colorize-s
 #   puts temperature
 # end
 
+#chance_of_precipitation - is rain or snow
+chance_of_precipitation = parsed_page.search(".//*[starts-with(@class, 'precip-prob value')]").xpath('text()').to_a
+
+# chance_of_precipitation.each do |chance|
+#   puts chance
+# end
+
 
 
 
