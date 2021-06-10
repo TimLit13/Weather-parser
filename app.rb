@@ -1,6 +1,9 @@
-#encoding: cp866
+#encoding: utf-8
 require 'mechanize'
 require 'translit'
+require 'nokogiri'
+require 'httparty'
+require 'open-uri'
 require_relative 'helpers/open_file.rb'
 require_relative 'helpers/extract_hash_from_file.rb'
 
@@ -29,23 +32,38 @@ end
 puts "Прогноз погоды на 2 недели"
 print "Укажите, какой город нужен: "
 
-user_city = gets.chomp.downcase
+#user_city = gets.chomp.downcase
+user_city = "Санкт-Петербург"
 user_city = Translit.convert(user_city, :english)
+puts user_city
+url = "https://www.meteoservice.ru/weather/14days/#{user_city}"
 
 #дебаг
 #puts user_city
 
 
-#Создать экземпляр "браузера""
+
+
+#Создать экземпляр "браузера" cc
 agent = Mechanize.new()
 
-#скачать страницу
-page = agent.get("https://www.meteoservice.ru/weather/14days/#{user_city}")
+#скачать страницу с помощью Mechanize
+page = agent.get(url)
+
+
+
+#скачать страницу с помощью Nokogiri
+unparsed_page = URI.open(url)
+parsed_page  = Nokogiri::HTML(unparsed_page)
 
 #дебаг
-puts page.body
+# puts page.body
+#puts "#{page.links}"
 
-puts "Прогноз погоды взят с сайта: \"https://www.meteoservice.ru/\""
 
-# arr = []
-# arr = page.search("//tr[starts-with(@id, 'callout forecast-row weekend')]").to_a
+
+
+
+
+
+
