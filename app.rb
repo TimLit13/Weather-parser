@@ -44,44 +44,48 @@ url = "https://www.meteoservice.ru/weather/14days/#{user_city}"
 unparsed_page = URI.open(url)
 parsed_page  = Nokogiri::HTML(unparsed_page)
 
-all_days_of_week = parsed_page.search('h3').xpath('text()')
+@all_days_of_week = parsed_page.search('h3').xpath('text()')
 
 # #debug
-# all_days_of_week.each do |day_of_week|
+# @all_days_of_week.each do |day_of_week|
 #   puts day_of_week
 # end
 
-all_dates = parsed_page.search(".//*[starts-with(@class, 'text-nowrap grey show-for-large')]").xpath('text()').to_a
+@all_dates = parsed_page.search(".//*[starts-with(@class, 'text-nowrap grey show-for-large')]").xpath('text()').to_a
 
 # #debug
-# all_dates.each do |date|
+# @all_dates.each do |date|
 #   puts date
 # end
 
-all_weather = parsed_page.search(".//*[starts-with(@class, 'column show-for-smedium text-left')]").xpath('text()').to_a
+@all_weather = parsed_page.search(".//*[starts-with(@class, 'column show-for-smedium text-left')]").xpath('text()').to_a
 
-# all_weather.each do |weather|
+# @all_weather.each do |weather|
 #   puts weather
 # end
 
-all_temperature = parsed_page.search(".//*[starts-with(@class, 'value colorize-server-side')]").xpath('text()').to_a
+@all_temperature = parsed_page.search(".//*[starts-with(@class, 'value colorize-server-side')]").xpath('text()').to_a
 
-# all_temperature.each do |temperature|
+# @all_temperature.each do |temperature|
 #   puts temperature
 # end
 
 #chance_of_precipitation - is rain or snow
-chance_of_precipitation = parsed_page.search(".//*[starts-with(@class, 'precip-prob value')]").xpath('text()').to_a
+@chance_of_precipitation = parsed_page.search(".//*[starts-with(@class, 'precip-prob value')]").xpath('text()').to_a
 
-# chance_of_precipitation.each do |chance|
+# @chance_of_precipitation.each do |chance|
 #   puts chance
 # end
 
-all_winds = parsed_page.search(".//*[starts-with(@class, 'value')]").xpath('text()').to_a
+@ll_winds = parsed_page.search(".//*[starts-with(@class, 'value')]").xpath('text()').to_a
 
-# all_winds.each do |wind|
+# @all_winds.each do |wind|
 #   puts wind
 # end
+
+# show_weather
+
+
 
 # puts "День недели:"
 # puts "Дата:"
