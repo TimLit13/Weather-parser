@@ -56,9 +56,12 @@ page = agent.get(url)
 unparsed_page = URI.open(url)
 parsed_page  = Nokogiri::HTML(unparsed_page)
 
-#дебаг
-# puts page.body
-#puts "#{page.links}"
+all_days_of_week = page.search('h3').xpath('text()')
+
+# #debug
+# all_days_of_week.each do |day_of_week|
+#   puts day_of_week
+# end
 
 
 
