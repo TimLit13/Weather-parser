@@ -58,7 +58,11 @@ all_dates = parsed_page.search(".//*[starts-with(@class, 'text-nowrap grey show-
 #   puts date
 # end
 
+all_weather = parsed_page.search(".//*[starts-with(@class, 'column show-for-smedium text-left')]").xpath('text()').to_a
 
+# all_weather.each do |weather|
+#   puts weather
+# end
 
 
 
