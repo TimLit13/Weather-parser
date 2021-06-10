@@ -64,6 +64,12 @@ all_weather = parsed_page.search(".//*[starts-with(@class, 'column show-for-smed
 #   puts weather
 # end
 
+all_temperature = parsed_page.search(".//*[starts-with(@class, 'value colorize-server-side')]").xpath('text()').to_a
+
+# all_temperature.each do |temperature|
+#   puts temperature
+# end
+
 
 
 
