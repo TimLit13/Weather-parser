@@ -83,6 +83,16 @@ all_winds = parsed_page.search(".//*[starts-with(@class, 'value')]").xpath('text
 #   puts wind
 # end
 
+# puts "День недели:"
+# puts "Дата:"
+# puts "Погода:"
+# puts "Температура макс:"
+# puts "Температура мин:"
+# puts "Вероятность осадков:"
+# puts "Ветер:"
+
+# puts "Прогноз погоды взят с сайта: \"https://www.meteoservice.ru/\""
+
 
 
 
