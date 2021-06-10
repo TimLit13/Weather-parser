@@ -1,31 +1,24 @@
 #encoding: cp866
 require 'mechanize'
 require_relative 'open_file.rb'
+require_relative 'extract_hash_from_file.rb'
 
 #загрузить список городов
 file_list_of_cities = open_file ('list_of_cities.txt')
 
-@cities = {}
-file_list_of_cities.each_line do |line|
-  temp = []
-  temp = line.strip.split(/[:,]/)
-
-  # puts temp
-  # puts temp.inspect
-  # puts temp.length
-  @cities[temp[0]] = temp[1]
-end
+#создать хэш из файла с городами и их идентификаторами
+@cities_hash = extract_hash_from_file (file_list_of_cities)
 
 
 
 #-----------------------------
 # debug
 
- puts =*80
- @cities.each do |key, value|
-   puts "#{key}\t#{value}"
- end
- puts =*80
+@cities_hash.each do |key, value|
+  puts '='*80
+  puts "#{key}\t#{value}"
+end
+puts '='*80
 
 #-----------------------------
 
