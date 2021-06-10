@@ -1,5 +1,4 @@
 #encoding: utf-8
-require 'mechanize'
 require 'translit'
 require 'nokogiri'
 require 'httparty'
@@ -41,27 +40,18 @@ url = "https://www.meteoservice.ru/weather/14days/#{user_city}"
 #дебаг
 #puts user_city
 
-
-
-
-#Создать экземпляр "браузера" cc
-agent = Mechanize.new()
-
-#скачать страницу с помощью Mechanize
-page = agent.get(url)
-
-
-
 #скачать страницу с помощью Nokogiri
 unparsed_page = URI.open(url)
 parsed_page  = Nokogiri::HTML(unparsed_page)
 
-all_days_of_week = page.search('h3').xpath('text()')
+#найти с помощью mechanize
+all_days_of_week = parsed_page.search('h3').xpath('text()')
 
 # #debug
 # all_days_of_week.each do |day_of_week|
 #   puts day_of_week
 # end
+
 
 
 
