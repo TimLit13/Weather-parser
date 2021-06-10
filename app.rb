@@ -5,6 +5,7 @@ require 'httparty'
 require 'open-uri'
 require_relative 'helpers/open_file.rb'
 require_relative 'helpers/extract_hash_from_file.rb'
+require_relative 'helpers/debug_method.rb'
 
 #загрузить список городов
 file_list_of_cities = open_file ('source/list_of_cities.txt')
@@ -46,44 +47,30 @@ parsed_page  = Nokogiri::HTML(unparsed_page)
 
 @all_days_of_week = parsed_page.search('h3').xpath('text()')
 
-# #debug
-# @all_days_of_week.each do |day_of_week|
-#   puts day_of_week
-# end
+#debug_parsed_array @all_days_of_week
+
 
 @all_dates = parsed_page.search(".//*[starts-with(@class, 'text-nowrap grey show-for-large')]").xpath('text()').to_a
 
-# #debug
-# @all_dates.each do |date|
-#   puts date
-# end
+#debug_parsed_array @all_days_of_week
 
 @all_weather = parsed_page.search(".//*[starts-with(@class, 'column show-for-smedium text-left')]").xpath('text()').to_a
 
-# @all_weather.each do |weather|
-#   puts weather
-# end
+#debug_parsed_array @all_days_of_week
 
 @all_temperature = parsed_page.search(".//*[starts-with(@class, 'value colorize-server-side')]").xpath('text()').to_a
 
-# @all_temperature.each do |temperature|
-#   puts temperature
-# end
+#debug_parsed_array @all_days_of_week
 
 #chance_of_precipitation - is rain or snow
 @chance_of_precipitation = parsed_page.search(".//*[starts-with(@class, 'precip-prob value')]").xpath('text()').to_a
 
-# @chance_of_precipitation.each do |chance|
-#   puts chance
-# end
+#debug_parsed_array @all_days_of_week
 
 @ll_winds = parsed_page.search(".//*[starts-with(@class, 'value')]").xpath('text()').to_a
 
-# @all_winds.each do |wind|
-#   puts wind
-# end
+#debug_parsed_array @all_days_of_week
 
-# show_weather
 
 
 
