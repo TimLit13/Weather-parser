@@ -9,9 +9,10 @@ def show_weather (options={})
   (0..13).each do |index|
     puts '='*80
     print "Дата: "
-    puts all_days_of_week[index]
-    print "Погода: "
     puts all_dates[index]
+    print "День недели: "
+    puts all_days_of_week[index]
+    puts "Погода: "
     print "Температура макс: "
     puts all_weather[index]
     print "Температура мин: "

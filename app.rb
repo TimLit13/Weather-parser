@@ -6,6 +6,7 @@ require 'open-uri'
 require_relative 'helpers/open_file.rb'
 require_relative 'helpers/extract_hash_from_file.rb'
 require_relative 'helpers/display_weather_for_user.rb'
+require_relative 'helpers/debug_parsed_arrays_method.rb'
 
 
 #загрузить список городов
@@ -14,10 +15,10 @@ file_list_of_cities = open_file ('source/list_of_cities.txt')
 #создать хэш из файла с городами и их идентификаторами
 @cities_hash = extract_hash_from_file (file_list_of_cities)
 
-#debug
-@cities_hash.each do |key, value|
-  puts "City: #{key}\t \t \tindex = #{value}"
-end
+# #debug
+# @cities_hash.each do |key, value|
+#   puts "City: #{key}\t \t \tindex = #{value}"
+# end
 
 #Запрос данных от пользователя
 puts "Прогноз погоды на 2 недели"
@@ -59,9 +60,9 @@ parsed_page  = Nokogiri::HTML(unparsed_page)
 
 #debug_parsed_array @all_days_of_week
 #debug_parsed_array @all_dates
-#debug_parsed_array @all_weather
-#debug_parsed_array @all_temperature
-#debug_parsed_array @chance_of_precipitation
-#debug_parsed_array @all_winds
+debug_parsed_array @all_weather
+debug_parsed_array @all_temperature
+debug_parsed_array @chance_of_precipitation
+debug_parsed_array @all_winds
 
 show_weather(@options)
