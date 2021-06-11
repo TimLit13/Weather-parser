@@ -26,12 +26,12 @@ print "Укажите, какой город нужен: "
 
 #user_city = gets.chomp.downcase
 user_city = "Санкт-Петербург"
-user_city1 = user_city
+user_city_encoding = user_city
 user_city = user_city.gsub(/[^\p{L}\s\d]/,'').gsub(/[\u{10000}-\u{FFFFF}]/,'').delete('\\')
 if @cities_hash[user_city]
-  user_city1 = Translit.convert(user_city1, :english)
+  user_city_encoding = Translit.convert(user_city_encoding, :english)
   puts 'Погода в городе ' + user_city
-  url = "https://www.meteoservice.ru/weather/14days/#{user_city1}"
+  url = "https://www.meteoservice.ru/weather/14days/#{user_city_encoding}"
 else
   puts 'Такой город отсутствует'
   puts 'Работа программы завершена'
@@ -50,19 +50,31 @@ parsed_page  = Nokogiri::HTML(unparsed_page)
 @chance_of_precipitation = parsed_page.search(".//*[starts-with(@class, 'precip-prob value')]").xpath('text()').to_a
 @all_winds = parsed_page.search(".//*[starts-with(@class, 'value')]").xpath('text()').to_a
 
+@chance_of_precipitation_fix=[]
+
+#Исправление строк полученных после парсинга
+@chance_of_precipitation.each_with_index do |element, index|
+  if index.odd?
+    @chance_of_precipitation_fix << element.to_s.strip
+  end
+end
+
+
+
+
 @options = {}
 @options[:all_days_of_week] = @all_days_of_week
 @options[:all_dates] = @all_dates
 @options[:all_weather] = @all_weather 
 @options[:all_temperature] = @all_temperature 
-@options[:chance_of_precipitation] = @chance_of_precipitation
+@options[:chance_of_precipitation] = @chance_of_precipitation_fix
 @options[:all_winds] = @all_winds
 
-#debug_parsed_array @all_days_of_week
-#debug_parsed_array @all_dates
-debug_parsed_array @all_weather
-debug_parsed_array @all_temperature
-debug_parsed_array @chance_of_precipitation
-debug_parsed_array @all_winds
+# debug_parsed_array @all_days_of_week
+# debug_parsed_array @all_dates
+# debug_parsed_array @all_weather
+# debug_parsed_array @all_temperature
+# debug_parsed_array @chance_of_precipitation_fix
+# debug_parsed_array @all_winds
 
 show_weather(@options)
