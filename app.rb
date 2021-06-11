@@ -40,3 +40,22 @@ parsed_page  = Nokogiri::HTML(unparsed_page)
 #chance_of_precipitation - is rain or snow
 @chance_of_precipitation = parsed_page.search(".//*[starts-with(@class, 'precip-prob value')]").xpath('text()').to_a
 @all_winds = parsed_page.search(".//*[starts-with(@class, 'value')]").xpath('text()').to_a
+
+@options = {}
+@options[:all_days_of_week] = @all_days_of_week
+@options[:all_dates] = @all_dates
+@options[:all_weather] = @all_weather 
+@options[:all_temperature] = @all_temperature 
+@options[:chance_of_precipitation] = @chance_of_precipitation
+@options[:all_winds] = @all_winds
+
+#debug_parsed_array @all_days_of_week
+#debug_parsed_array @all_dates
+#debug_parsed_array @all_weather
+#debug_parsed_array @all_temperature
+#debug_parsed_array @chance_of_precipitation
+#debug_parsed_array @all_winds
+
+show_weather(@option)
+
+
