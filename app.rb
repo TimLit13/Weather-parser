@@ -14,18 +14,26 @@ file_list_of_cities = open_file ('source/list_of_cities.txt')
 #создать хэш из файла с городами и их идентификаторами
 @cities_hash = extract_hash_from_file (file_list_of_cities)
 
+#debug
+@cities_hash.each do |key, value|
+  puts "City: #{key}\t \t \tindex = #{value}"
+end
+
 #Запрос данных от пользователя
 puts "Прогноз погоды на 2 недели"
 print "Укажите, какой город нужен: "
 
 #user_city = gets.chomp.downcase
 user_city = "Санкт-Петербург"
+user_city1 = user_city
+user_city = user_city.gsub(/[^\p{L}\s\d]/,'').gsub(/[\u{10000}-\u{FFFFF}]/,'').delete('\\')
 if @cities_hash[user_city]
-  user_city = Translit.convert(user_city, :english)
+  user_city1 = Translit.convert(user_city1, :english)
   puts 'Погода в городе ' + user_city
-  url = "https://www.meteoservice.ru/weather/14days/#{user_city}"
+  url = "https://www.meteoservice.ru/weather/14days/#{user_city1}"
 else
   puts 'Такой город отсутствует'
+  puts 'Работа программы завершена'
   exit 
 end
 
@@ -56,6 +64,4 @@ parsed_page  = Nokogiri::HTML(unparsed_page)
 #debug_parsed_array @chance_of_precipitation
 #debug_parsed_array @all_winds
 
-show_weather(@option)
-
-
+show_weather(@options)
