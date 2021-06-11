@@ -12,18 +12,24 @@ def show_weather (options={})
     puts all_dates[index]
     print "День недели: "
     puts all_days_of_week[index]
-    puts "Погода: "
-    print "Температура макс: "
+    print "Погода: "
     puts all_weather[index]
+    print "Температура макс: "
+    puts all_temperature[(index)*2]
     print "Температура мин: "
-    puts all_temperature[index]
+    puts all_temperature[(index)*2+1]
     print "Вероятность осадков: "
     puts chance_of_precipitation[index]
-    print "Ветер: "
-    puts all_winds[index]
+    print "Скорость ветра: "
+    puts all_winds[(index)*4+3]
+    print "Направление ветра: "
+    puts all_winds[(index)*4+2]
+
       
   end
+
   puts '='*80
   puts "Прогноз погоды взят с сайта: \"https://www.meteoservice.ru/\""
+
 end
 
