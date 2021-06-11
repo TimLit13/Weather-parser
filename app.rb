@@ -24,14 +24,14 @@ file_list_of_cities = open_file ('source/list_of_cities.txt')
 puts "Прогноз погоды на 2 недели"
 print "Укажите, какой город нужен: "
 
-#user_city = gets.chomp.downcase
-user_city = "Санкт-Петербург"
+user_city = gets.strip
+
 user_city_encoding = user_city
 user_city = user_city.gsub(/[^\p{L}\s\d]/,'').gsub(/[\u{10000}-\u{FFFFF}]/,'').delete('\\')
 if @cities_hash[user_city]
   user_city_encoding = Translit.convert(user_city_encoding, :english)
   puts 'Погода в городе ' + user_city
-  url = "https://www.meteoservice.ru/weather/14days/#{user_city_encoding}"
+  url = "https://www.meteoservice.ru/weather/14days/#{user_city_encoding.downcase}"
 else
   puts 'Такой город отсутствует'
   puts 'Работа программы завершена'
